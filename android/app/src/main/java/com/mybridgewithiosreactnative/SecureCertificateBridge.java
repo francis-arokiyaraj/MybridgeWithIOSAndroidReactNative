@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.security.KeyStore;
+import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -31,7 +32,7 @@ public class SecureCertificateBridge extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "SecureCertificate";
+        return "SecureCertificateBridge";
     }
 
     private void generateKeyIfNeeded() {
@@ -61,29 +62,86 @@ public class SecureCertificateBridge extends ReactContextBaseJavaModule {
         return ((SecretKey) keyStore.getKey(KEY_ALIAS, null));
     }
 
+//    @ReactMethod
+//    public void storeCertificate(String filePath, String certName, Promise promise) {
+//        try {
+//            byte[] fileData = readFile(new File(filePath));
+//            SecretKey key = getSecretKey();
+//
+//            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
+//
+//            // Generate random IV
+//            SecureRandom secureRandom = new SecureRandom();
+//            byte[] iv = new byte[16];
+//            secureRandom.nextBytes(iv);
+//            IvParameterSpec ivSpec = new IvParameterSpec(iv);
+//
+//            cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
+//            byte[] encrypted = cipher.doFinal(fileData);
+//
+//            // Store IV + encrypted data together
+//            File file = new File(getReactApplicationContext().getFilesDir(), certName);
+//            FileOutputStream outputStream = new FileOutputStream(file);
+//            outputStream.write(iv);          // first 16 bytes = IV
+//            outputStream.write(encrypted);   // remaining = ciphertext
+//            outputStream.close();
+//
+//            promise.resolve("Saved successfully");
+//        } catch (Exception e) {
+//            promise.reject("STORE_ERROR", e);
+//        }
+//    }
+//
+//    @ReactMethod
+//    public void readCertificate(String certName, Promise promise) {
+//        try {
+//            File file = new File(getReactApplicationContext().getFilesDir(), certName);
+//            byte[] content = readFile(file);
+//
+//            if (content.length < 16) {
+//                promise.reject("READ_ERROR", "Invalid encrypted file format");
+//                return;
+//            }
+//
+//            byte[] iv = new byte[16];
+//            byte[] encrypted = new byte[content.length - 16];
+//
+//            System.arraycopy(content, 0, iv, 0, 16);
+//            System.arraycopy(content, 16, encrypted, 0, encrypted.length);
+//
+//            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
+//            IvParameterSpec ivSpec = new IvParameterSpec(iv);
+//            cipher.init(Cipher.DECRYPT_MODE, getSecretKey(), ivSpec);
+//
+//            byte[] decrypted = cipher.doFinal(encrypted);
+//            promise.resolve(Base64.encodeToString(decrypted, Base64.DEFAULT));
+//        } catch (Exception e) {
+//            promise.reject("READ_ERROR", e);
+//        }
+//    }
+
     @ReactMethod
     public void storeCertificate(String filePath, String certName, Promise promise) {
-        Log.d("TAG","init success");
         try {
             byte[] fileData = readFile(new File(filePath));
             SecretKey key = getSecretKey();
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
-            byte[] iv = new byte[16];
-            IvParameterSpec ivSpec = new IvParameterSpec(iv);
-            cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
+            cipher.init(Cipher.ENCRYPT_MODE, key);
 
+            byte[] iv = cipher.getIV(); // Save this for decryption
             byte[] encrypted = cipher.doFinal(fileData);
-            File file = new File(getReactApplicationContext().getFilesDir(), certName);
-            file.createNewFile();
-            file.setWritable(true);
-            file.setReadable(true);
-            file.setExecutable(true);
 
+            // Combine IV + encrypted data
+            byte[] combined = new byte[iv.length + encrypted.length];
+            System.arraycopy(iv, 0, combined, 0, iv.length);
+            System.arraycopy(encrypted, 0, combined, iv.length, encrypted.length);
+
+            File file = new File(getReactApplicationContext().getFilesDir(), certName);
             FileOutputStream outputStream = new FileOutputStream(file);
-            outputStream.write(encrypted);
+            outputStream.write(combined);
             outputStream.close();
-            Log.d("TAG","Saved success");
+
             promise.resolve("Saved successfully");
         } catch (Exception e) {
             promise.reject("STORE_ERROR", e);
@@ -94,19 +152,26 @@ public class SecureCertificateBridge extends ReactContextBaseJavaModule {
     public void readCertificate(String certName, Promise promise) {
         try {
             File file = new File(getReactApplicationContext().getFilesDir(), certName);
-            byte[] encrypted = readFile(file);
+            byte[] combined = readFile(file);
+
+            // Extract IV and encrypted data
+            byte[] iv = new byte[16];
+            byte[] encrypted = new byte[combined.length - 16];
+            System.arraycopy(combined, 0, iv, 0, 16);
+            System.arraycopy(combined, 16, encrypted, 0, encrypted.length);
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
-            byte[] iv = new byte[16];
-            IvParameterSpec ivSpec = new IvParameterSpec(iv);
-            cipher.init(Cipher.DECRYPT_MODE, getSecretKey(), ivSpec);
+            cipher.init(Cipher.DECRYPT_MODE, getSecretKey(), new IvParameterSpec(iv));
 
             byte[] decrypted = cipher.doFinal(encrypted);
-            promise.resolve(Base64.encodeToString(decrypted, Base64.DEFAULT));
+            String base64 = Base64.encodeToString(decrypted, Base64.DEFAULT);
+            Log.d("TAG",base64);
+            promise.resolve(base64);
         } catch (Exception e) {
             promise.reject("READ_ERROR", e);
         }
     }
+
 
     private byte[] readFile(File file) throws Exception {
         FileInputStream fis = new FileInputStream(file);
@@ -116,7 +181,6 @@ public class SecureCertificateBridge extends ReactContextBaseJavaModule {
         return content;
     }
 }
-
 
 //
 //import android.os.Build;

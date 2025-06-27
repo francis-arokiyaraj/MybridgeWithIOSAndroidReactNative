@@ -25,13 +25,13 @@ import {
 import { NativeModules } from 'react-native';
 import { pick, types } from '@react-native-documents/picker';
 import RNFS from 'react-native-fs';
-
+import { Buffer } from 'buffer';
 
 
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-  const { SecureFileStorage, SecureCertificateBridge } = NativeModules;
+  const { SecureFileStorage, SecureCertificateBridge, WifiConnector, SecureDownloader, SecureHttps} = NativeModules;
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -47,8 +47,36 @@ function App(): React.JSX.Element {
    * https://github.com/react-native-community/discussions-and-proposals/discussions/827
    */
   const safePadding = '5%';
+  //IoTLab@safran#1234
+  //S3S1BLR5600102
+  const ssid = 'SESI_LAB', password = 'S3S1BLR5600102', isWEP = false;
 
 
+//  async function requestWifiPermissions() {
+//   if (Platform.OS === 'android') {
+//     await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
+//     await request(PERMISSIONS.ANDROID.CHANGE_NETWORK_STATE);
+
+//     const writeSettings = await check(PERMISSIONS.ANDROID.WRITE_SETTINGS);
+//     if (writeSettings !== RESULTS.GRANTED) {
+//       Linking.openSettings(); // or Intent to WRITE_SETTINGS
+//     }
+//   }
+// }
+
+ async function connectToWifi(ssid, password, isWEP = false) {
+  try {
+    // await requestWifiPermissions();
+    const result = await WifiConnector.connectToWifi(ssid, password, isWEP);
+    console.log('Wi-Fi connection result:', result);
+  } catch (e) {
+    console.warn('Wi-Fi error:', e);
+  }
+}
+
+const connectToWifiIOS = async (ssid: string, password: string): Promise<string> => {
+  return WifiConnector.connectToWifi(ssid, password);
+};
 
 async function requestStoragePermission() {
   if (Platform.OS === 'android') {
@@ -120,6 +148,47 @@ async function requestStoragePermission() {
     console.log('Certificate stored securely');
   // }
   };
+
+  async function downloadFile(filename) {
+  const url = `http://192.168.0.148:8000/api/data?file=${encodeURIComponent(filename)}`;
+
+  try {
+    const res = await fetch(url);
+    console.log("res", res);
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+
+    const arrayBuffer = await res.arrayBuffer();
+    const base64Data = Buffer.from(arrayBuffer).toString('base64');
+
+    // Choose destination path
+    const destPath =
+      Platform.OS === 'android'
+        ? `${RNFS.DownloadDirectoryPath}/${filename}`
+        : `${RNFS.DocumentDirectoryPath}/${filename}`; // iOS safe directory
+
+    // Save file
+    await RNFS.writeFile(destPath, base64Data, 'base64');
+
+    console.log(`✅ File downloaded and saved to: ${destPath}`);
+    return destPath;
+  } catch (err) {
+    console.error('❌ Download failed:', err.message);
+  }
+}
+
+ async function downloadFileHttps(filename, destFileName) {
+  const url = `https://192.168.0.148:8443/api/data?file=${encodeURIComponent(filename)}`;
+
+  try {
+    SecureDownloader.downloadSecureFile(url, destFileName)
+      .then(path => console.log('✅ File saved at:', path))
+      .catch(err => console.error('❌ Download error:', err));
+  } catch (err) {
+    console.error('❌ Download failed:', err);
+  }
+}
+
+
 
   return (
     <View style={backgroundStyle}>
@@ -198,15 +267,57 @@ async function requestStoragePermission() {
           }).catch(console.error);
         }}
         />
-        <Button title="delete cert"
-        onPress={()=>{console.log('clicked read to downloads');
-          SecureCertificateBridge.deleteCertificate(
-            'secure_data.aes',
-            'output.txt'
-          ).then(console.log).catch(console.error);
+        <Button title="WIFI Connection"
+        onPress={()=>{
+          if (Platform.OS === 'android') {
+            console.log('clicked wifi connect android');
+            connectToWifi(
+            ssid, password, isWEP
+          ).then((d)=>{
+            console.log('Wifi connected', d);
+          }).catch((e)=>console.error(e));
+          }else{
+            console.log('clicked wifi connect IOS');
+            connectToWifiIOS(
+            ssid, password
+          ).then((d)=>{
+            console.log('Wifi connected', d);
+          }).catch((e)=>console.error(e));
+          }
+          
         }}
         />
 
+        <Button title="Check WIFI Connection and internet"
+        onPress={()=>{console.log('clicked Check WIFI Connection and internet');
+          // downloadFile('test.txt'); //'gain-1.csv.enc' //HTTP api cal
+          downloadFileHttps('test.txt','testHttps.txt'); //HTTP(s) api call
+        //   fetch('http://192.168.0.148:8000/api/data', {
+        //     method: 'GET',
+        //     headers: {
+        //       'Accept': 'application/json',
+        //       'Content-Type': 'application/json',
+        //     },
+        //   })
+        //     .then(res => {
+        //       console.log("Internet accessible", res )
+        //       if (res.status === 204) console.log("Internet accessible", res );
+        //       else console.warn("Connected but no internet");
+        //     })
+        //     .catch((e)=>{console.error("http error: ",e)});
+        }}
+        />
+        <Button title="Save to downloads in android"
+        onPress={()=>{console.log('clicked Save to downloads in android');
+          if (Platform.OS === 'android') {
+            SecureFileStorage.exportFileToDownloads(
+              'testHttps.txt'
+            ).then((d)=>{
+              console.log('file copied...');
+            }).catch(console.error);
+          }
+        }}
+        />
       </ScrollView>
     </View>
   );
