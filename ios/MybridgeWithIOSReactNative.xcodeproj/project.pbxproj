@@ -11,6 +11,15 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		1D4B7B412DFAE7F9000BDD65 /* SecureCertificateBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B7B402DFAE7F9000BDD65 /* SecureCertificateBridge.swift */; };
 		1D4B7B432DFAE98E000BDD65 /* SecureCertificateBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B7B422DFAE98E000BDD65 /* SecureCertificateBridge.m */; };
+		1D726B782E02C40F0009FF58 /* WifiConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D726B772E02C40F0009FF58 /* WifiConnector.swift */; };
+		1D726B7A2E02C4470009FF58 /* WifiConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D726B792E02C4470009FF58 /* WifiConnector.m */; };
+		1DB4A6A52E095E7D002310E4 /* SecureDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4A6A42E095E7D002310E4 /* SecureDownloader.swift */; };
+		1DB4A6A72E095EA1002310E4 /* SecureDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4A6A62E095EA1002310E4 /* SecureDownloader.m */; };
+		1DB4A6AB2E09652A002310E4 /* serverglobalca.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1DB4A6AA2E09652A002310E4 /* serverglobalca.pem */; };
+		1DB4A6AD2E0967C8002310E4 /* globalca.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1DB4A6AC2E0967C8002310E4 /* globalca.pem */; };
+		1DB4A6AF2E0968B6002310E4 /* globalca.der in Resources */ = {isa = PBXBuildFile; fileRef = 1DB4A6AE2E0968B6002310E4 /* globalca.der */; };
+		1DB4A6B12E096D2C002310E4 /* globalcasecond.der in Resources */ = {isa = PBXBuildFile; fileRef = 1DB4A6B02E096D2C002310E4 /* globalcasecond.der */; };
+		1DB4A6B32E0970D2002310E4 /* secondserverglobalca.der in Resources */ = {isa = PBXBuildFile; fileRef = 1DB4A6B22E0970D2002310E4 /* secondserverglobalca.der */; };
 		1DEE08E52DF729940070B25D /* SecureFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE08E42DF729940070B25D /* SecureFileStorage.m */; };
 		1DEE08E72DF72A0B0070B25D /* SecureFileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE08E62DF72A0B0070B25D /* SecureFileStorage.swift */; };
 		72547F42E6BDD9FA95FAAAEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
@@ -25,6 +34,17 @@
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = MybridgeWithIOSReactNative/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1D4B7B402DFAE7F9000BDD65 /* SecureCertificateBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecureCertificateBridge.swift; path = MybridgeWithIOSReactNative/SecureCertificateBridge.swift; sourceTree = "<group>"; };
 		1D4B7B422DFAE98E000BDD65 /* SecureCertificateBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SecureCertificateBridge.m; path = MybridgeWithIOSReactNative/SecureCertificateBridge.m; sourceTree = "<group>"; };
+		1D726B762E02ACE20009FF58 /* MybridgeWithIOSReactNative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MybridgeWithIOSReactNative.entitlements; sourceTree = "<group>"; };
+		1D726B772E02C40F0009FF58 /* WifiConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WifiConnector.swift; path = MybridgeWithIOSReactNative/WifiConnector.swift; sourceTree = "<group>"; };
+		1D726B792E02C4470009FF58 /* WifiConnector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WifiConnector.m; path = MybridgeWithIOSReactNative/WifiConnector.m; sourceTree = "<group>"; };
+		1D89948B2E0D40E000F0F38E /* MybridgeWithIOSReactNative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MybridgeWithIOSReactNative.entitlements; path = MybridgeWithIOSReactNative/MybridgeWithIOSReactNative.entitlements; sourceTree = "<group>"; };
+		1DB4A6A42E095E7D002310E4 /* SecureDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecureDownloader.swift; path = MybridgeWithIOSReactNative/SecureDownloader.swift; sourceTree = "<group>"; };
+		1DB4A6A62E095EA1002310E4 /* SecureDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SecureDownloader.m; path = MybridgeWithIOSReactNative/SecureDownloader.m; sourceTree = "<group>"; };
+		1DB4A6AA2E09652A002310E4 /* serverglobalca.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = serverglobalca.pem; sourceTree = "<group>"; };
+		1DB4A6AC2E0967C8002310E4 /* globalca.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = globalca.pem; sourceTree = "<group>"; };
+		1DB4A6AE2E0968B6002310E4 /* globalca.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = globalca.der; sourceTree = "<group>"; };
+		1DB4A6B02E096D2C002310E4 /* globalcasecond.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = globalcasecond.der; sourceTree = "<group>"; };
+		1DB4A6B22E0970D2002310E4 /* secondserverglobalca.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = secondserverglobalca.der; sourceTree = "<group>"; };
 		1DEE08E32DF729940070B25D /* MybridgeWithIOSReactNative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MybridgeWithIOSReactNative-Bridging-Header.h"; sourceTree = "<group>"; };
 		1DEE08E42DF729940070B25D /* SecureFileStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SecureFileStorage.m; path = MybridgeWithIOSReactNative/SecureFileStorage.m; sourceTree = "<group>"; };
 		1DEE08E62DF72A0B0070B25D /* SecureFileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFileStorage.swift; sourceTree = "<group>"; };
@@ -51,6 +71,12 @@
 		13B07FAE1A68108700A75B9A /* MybridgeWithIOSReactNative */ = {
 			isa = PBXGroup;
 			children = (
+				1D89948B2E0D40E000F0F38E /* MybridgeWithIOSReactNative.entitlements */,
+				1DB4A6B22E0970D2002310E4 /* secondserverglobalca.der */,
+				1DB4A6B02E096D2C002310E4 /* globalcasecond.der */,
+				1DB4A6AE2E0968B6002310E4 /* globalca.der */,
+				1DB4A6AC2E0967C8002310E4 /* globalca.pem */,
+				1DB4A6AA2E09652A002310E4 /* serverglobalca.pem */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -61,6 +87,11 @@
 				1DEE08E62DF72A0B0070B25D /* SecureFileStorage.swift */,
 				1D4B7B402DFAE7F9000BDD65 /* SecureCertificateBridge.swift */,
 				1D4B7B422DFAE98E000BDD65 /* SecureCertificateBridge.m */,
+				1D726B762E02ACE20009FF58 /* MybridgeWithIOSReactNative.entitlements */,
+				1D726B772E02C40F0009FF58 /* WifiConnector.swift */,
+				1D726B792E02C4470009FF58 /* WifiConnector.m */,
+				1DB4A6A42E095E7D002310E4 /* SecureDownloader.swift */,
+				1DB4A6A62E095EA1002310E4 /* SecureDownloader.m */,
 			);
 			name = MybridgeWithIOSReactNative;
 			sourceTree = "<group>";
@@ -172,9 +203,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DB4A6B12E096D2C002310E4 /* globalcasecond.der in Resources */,
+				1DB4A6B32E0970D2002310E4 /* secondserverglobalca.der in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				1DB4A6AF2E0968B6002310E4 /* globalca.der in Resources */,
+				1DB4A6AB2E09652A002310E4 /* serverglobalca.pem in Resources */,
 				72547F42E6BDD9FA95FAAAEE /* PrivacyInfo.xcprivacy in Resources */,
+				1DB4A6AD2E0967C8002310E4 /* globalca.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,9 +241,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MybridgeWithIOSReactNative/Pods-MybridgeWithIOSReactNative-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MybridgeWithIOSReactNative/Pods-MybridgeWithIOSReactNative-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -244,9 +284,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MybridgeWithIOSReactNative/Pods-MybridgeWithIOSReactNative-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MybridgeWithIOSReactNative/Pods-MybridgeWithIOSReactNative-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -264,7 +308,11 @@
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
 				1DEE08E52DF729940070B25D /* SecureFileStorage.m in Sources */,
 				1D4B7B432DFAE98E000BDD65 /* SecureCertificateBridge.m in Sources */,
+				1D726B782E02C40F0009FF58 /* WifiConnector.swift in Sources */,
+				1D726B7A2E02C4470009FF58 /* WifiConnector.m in Sources */,
 				1D4B7B412DFAE7F9000BDD65 /* SecureCertificateBridge.swift in Sources */,
+				1DB4A6A72E095EA1002310E4 /* SecureDownloader.m in Sources */,
+				1DB4A6A52E095E7D002310E4 /* SecureDownloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,10 +325,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MybridgeWithIOSReactNative/MybridgeWithIOSReactNative.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2A737GQ4Z8;
+				DEVELOPMENT_TEAM = 788LFFPK23;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MybridgeWithIOSReactNative/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -294,7 +343,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saf.iosbridge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.safran.iosbridge;
 				PRODUCT_NAME = MybridgeWithIOSReactNative;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MybridgeWithIOSReactNative-Bridging-Header.h";
@@ -310,10 +359,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MybridgeWithIOSReactNative/MybridgeWithIOSReactNative.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2A737GQ4Z8;
+				DEVELOPMENT_TEAM = 788LFFPK23;
 				INFOPLIST_FILE = MybridgeWithIOSReactNative/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -326,7 +376,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.saf.iosbridge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.safran.iosbridge;
 				PRODUCT_NAME = MybridgeWithIOSReactNative;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MybridgeWithIOSReactNative-Bridging-Header.h";
@@ -404,10 +454,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -476,10 +523,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

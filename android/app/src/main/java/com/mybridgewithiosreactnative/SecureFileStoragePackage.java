@@ -15,6 +15,9 @@ public class SecureFileStoragePackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new SecureFileStorage(reactContext));
         modules.add(new SecureCertificateBridge(reactContext));
+        modules.add(new WifiConnector(reactContext));
+        modules.add(new SecureHttpSDownloaderModule(reactContext));
+        modules.add(new SecureHttpsModule(reactContext));
 
         return modules;
     }

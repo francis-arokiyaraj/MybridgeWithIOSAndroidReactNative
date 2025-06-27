@@ -253,6 +253,16 @@ public class SecureFileStorage extends ReactContextBaseJavaModule {
             promise.reject("READ_FAILED", e);
         }
     }
+
+    @ReactMethod
+    public void exportFileToDownloads(String filename, Promise promise) {
+        boolean success = CopyFileToDownloads.copyToDownloads(getReactApplicationContext(), filename);
+        if (success) {
+            promise.resolve("File exported to Downloads.");
+        } else {
+            promise.reject("EXPORT_FAILED", "Could not copy file to Downloads.");
+        }
+    }
 }
 
 
